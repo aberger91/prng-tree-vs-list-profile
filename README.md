@@ -36,4 +36,3 @@ Each sample counts as 0.01 seconds.
                   | 0.00  | 260.12             | 0.00          | 6          |                      | 0.00   | 0.00   | obtainNumberBetween |
                   | 0.00  | 260.12             | 0.00          | 2          |                      | 0.00   | 0.00   | freeTree            |
                   | 0.00  | 260.12             | 0.00          | 1          |                      | 0.00   | 0.56   | countWithTree       |
-
