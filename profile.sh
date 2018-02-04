@@ -14,8 +14,8 @@ rm bin/main.o
 
 for prog in bin/*; do
     for testfile in tests/*; do
-        cat $testfile | $prog
-        gprof $prog gmon.out > data/$("$prog" + ".txt")
+        #cat $testfile | $prog
+        ls -lt data/$("$prog" + ".txt")
     done
 done
 
