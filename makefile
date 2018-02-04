@@ -1,4 +1,8 @@
-all:	assign1-0 assign1-2 clean
+all:	directories assign1-0 assign1-2 clean
+
+directories:
+	mkdir -p bin
+	mkdir -p data
 
 assign1-0:
 	gcc -c -pg -O0 src/main.c
