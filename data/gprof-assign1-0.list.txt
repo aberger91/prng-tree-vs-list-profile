@@ -1,0 +1,50 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls   s/call   s/call  name    
+100.45    267.01   267.01        1   267.01   267.01  generateList
+  0.00    267.01     0.00  3000000     0.00     0.00  getNextNumber
+  0.00    267.01     0.00        5     0.00     0.00  obtainNumberBetween
+  0.00    267.01     0.00        1     0.00   267.01  countWithList
+  0.00    267.01     0.00        1     0.00     0.00  freeList
+  0.00    267.01     0.00        1     0.00     0.00  printList
+
+			Call graph
+
+
+granularity: each sample hit covers 2 byte(s) for 0.00% of 267.01 seconds
+
+index % time    self  children    called     name
+                0.00  267.01       1/1           main [3]
+[1]    100.0    0.00  267.01       1         countWithList [1]
+              267.01    0.00       1/1           generateList [2]
+                0.00    0.00       1/1           printList [7]
+                0.00    0.00       1/1           freeList [6]
+-----------------------------------------------
+              267.01    0.00       1/1           countWithList [1]
+[2]    100.0  267.01    0.00       1         generateList [2]
+                0.00    0.00 3000000/3000000     getNextNumber [4]
+-----------------------------------------------
+                                                 <spontaneous>
+[3]    100.0    0.00  267.01                 main [3]
+                0.00  267.01       1/1           countWithList [1]
+                0.00    0.00       5/5           obtainNumberBetween [5]
+-----------------------------------------------
+                0.00    0.00 3000000/3000000     generateList [2]
+[4]      0.0    0.00    0.00 3000000         getNextNumber [4]
+-----------------------------------------------
+                0.00    0.00       5/5           main [3]
+[5]      0.0    0.00    0.00       5         obtainNumberBetween [5]
+-----------------------------------------------
+                0.00    0.00       1/1           countWithList [1]
+[6]      0.0    0.00    0.00       1         freeList [6]
+-----------------------------------------------
+                0.00    0.00       1/1           countWithList [1]
+[7]      0.0    0.00    0.00       1         printList [7]
+-----------------------------------------------
+
+Index by function name
+
+   [1] countWithList           [2] generateList            [5] obtainNumberBetween
+   [6] freeList                [4] getNextNumber           [7] printList

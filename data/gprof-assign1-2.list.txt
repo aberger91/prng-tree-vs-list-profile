@@ -1,0 +1,39 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls   s/call   s/call  name    
+100.51    139.86   139.86        1   139.86   139.87  generateList
+  0.00    139.87     0.01  3000000     0.00     0.00  getNextNumber
+  0.00    139.87     0.01                             frame_dummy
+  0.00    139.87     0.00        1     0.00     0.00  printList
+
+			Call graph
+
+
+granularity: each sample hit covers 2 byte(s) for 0.01% of 139.87 seconds
+
+index % time    self  children    called     name
+              139.86    0.01       1/1           countWithList [2]
+[1]    100.0  139.86    0.01       1         generateList [1]
+                0.01    0.00 3000000/3000000     getNextNumber [3]
+-----------------------------------------------
+                                                 <spontaneous>
+[2]    100.0    0.00  139.87                 countWithList [2]
+              139.86    0.01       1/1           generateList [1]
+                0.00    0.00       1/1           printList [5]
+-----------------------------------------------
+                0.01    0.00 3000000/3000000     generateList [1]
+[3]      0.0    0.01    0.00 3000000         getNextNumber [3]
+-----------------------------------------------
+                                                 <spontaneous>
+[4]      0.0    0.01    0.00                 frame_dummy [4]
+-----------------------------------------------
+                0.00    0.00       1/1           countWithList [2]
+[5]      0.0    0.00    0.00       1         printList [5]
+-----------------------------------------------
+
+Index by function name
+
+   [4] frame_dummy             [3] getNextNumber
+   [1] generateList            [5] printList

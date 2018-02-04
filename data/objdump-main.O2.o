@@ -1,0 +1,107 @@
+
+bin/main.o:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000000000 <getNextNumber>:
+   0:	55                   	push   %rbp
+   1:	48 89 e5             	mov    %rsp,%rbp
+   4:	e8 00 00 00 00       	callq  9 <getNextNumber+0x9>
+   9:	e8 00 00 00 00       	callq  e <getNextNumber+0xe>
+   e:	8b 35 00 00 00 00    	mov    0x0(%rip),%esi        # 14 <getNextNumber+0x14>
+  14:	8b 0d 00 00 00 00    	mov    0x0(%rip),%ecx        # 1a <getNextNumber+0x1a>
+  1a:	99                   	cltd   
+  1b:	5d                   	pop    %rbp
+  1c:	29 f1                	sub    %esi,%ecx
+  1e:	83 c1 01             	add    $0x1,%ecx
+  21:	f7 f9                	idiv   %ecx
+  23:	8d 04 16             	lea    (%rsi,%rdx,1),%eax
+  26:	c3                   	retq   
+  27:	66 0f 1f 84 00 00 00 	nopw   0x0(%rax,%rax,1)
+  2e:	00 00 
+
+0000000000000030 <obtainNumberBetween>:
+  30:	55                   	push   %rbp
+  31:	48 89 e5             	mov    %rsp,%rbp
+  34:	41 55                	push   %r13
+  36:	41 54                	push   %r12
+  38:	53                   	push   %rbx
+  39:	48 83 ec 18          	sub    $0x18,%rsp
+  3d:	e8 00 00 00 00       	callq  42 <obtainNumberBetween+0x12>
+  42:	31 c0                	xor    %eax,%eax
+  44:	89 d1                	mov    %edx,%ecx
+  46:	89 f3                	mov    %esi,%ebx
+  48:	49 89 fd             	mov    %rdi,%r13
+  4b:	41 89 d4             	mov    %edx,%r12d
+  4e:	89 f2                	mov    %esi,%edx
+  50:	48 89 fe             	mov    %rdi,%rsi
+  53:	bf 00 00 00 00       	mov    $0x0,%edi
+  58:	e8 00 00 00 00       	callq  5d <obtainNumberBetween+0x2d>
+  5d:	48 8d 75 dc          	lea    -0x24(%rbp),%rsi
+  61:	31 c0                	xor    %eax,%eax
+  63:	bf 00 00 00 00       	mov    $0x0,%edi
+  68:	e8 00 00 00 00       	callq  6d <obtainNumberBetween+0x3d>
+  6d:	8b 45 dc             	mov    -0x24(%rbp),%eax
+  70:	39 c3                	cmp    %eax,%ebx
+  72:	7f 05                	jg     79 <obtainNumberBetween+0x49>
+  74:	41 39 c4             	cmp    %eax,%r12d
+  77:	7d 0d                	jge    86 <obtainNumberBetween+0x56>
+  79:	44 89 e2             	mov    %r12d,%edx
+  7c:	89 de                	mov    %ebx,%esi
+  7e:	4c 89 ef             	mov    %r13,%rdi
+  81:	e8 00 00 00 00       	callq  86 <obtainNumberBetween+0x56>
+  86:	48 83 c4 18          	add    $0x18,%rsp
+  8a:	5b                   	pop    %rbx
+  8b:	41 5c                	pop    %r12
+  8d:	41 5d                	pop    %r13
+  8f:	5d                   	pop    %rbp
+  90:	c3                   	retq   
+
+Disassembly of section .text.startup:
+
+0000000000000000 <main>:
+   0:	55                   	push   %rbp
+   1:	48 89 e5             	mov    %rsp,%rbp
+   4:	53                   	push   %rbx
+   5:	48 83 ec 08          	sub    $0x8,%rsp
+   9:	e8 00 00 00 00       	callq  e <main+0xe>
+   e:	ba ff 7f 00 00       	mov    $0x7fff,%edx
+  13:	31 f6                	xor    %esi,%esi
+  15:	bf 00 00 00 00       	mov    $0x0,%edi
+  1a:	e8 00 00 00 00       	callq  1f <main+0x1f>
+  1f:	ba ff 7f 00 00       	mov    $0x7fff,%edx
+  24:	89 c6                	mov    %eax,%esi
+  26:	bf 00 00 00 00       	mov    $0x0,%edi
+  2b:	89 05 00 00 00 00    	mov    %eax,0x0(%rip)        # 31 <main+0x31>
+  31:	e8 00 00 00 00       	callq  36 <main+0x36>
+  36:	ba 00 00 00 40       	mov    $0x40000000,%edx
+  3b:	31 f6                	xor    %esi,%esi
+  3d:	bf 00 00 00 00       	mov    $0x0,%edi
+  42:	89 05 00 00 00 00    	mov    %eax,0x0(%rip)        # 48 <main+0x48>
+  48:	e8 00 00 00 00       	callq  4d <main+0x4d>
+  4d:	89 c3                	mov    %eax,%ebx
+  4f:	90                   	nop
+  50:	31 f6                	xor    %esi,%esi
+  52:	ba 02 00 00 00       	mov    $0x2,%edx
+  57:	bf 00 00 00 00       	mov    $0x0,%edi
+  5c:	e8 00 00 00 00       	callq  61 <main+0x61>
+  61:	83 f8 01             	cmp    $0x1,%eax
+  64:	74 1a                	je     80 <main+0x80>
+  66:	83 f8 02             	cmp    $0x2,%eax
+  69:	74 25                	je     90 <main+0x90>
+  6b:	85 c0                	test   %eax,%eax
+  6d:	0f 1f 00             	nopl   (%rax)
+  70:	75 de                	jne    50 <main+0x50>
+  72:	48 83 c4 08          	add    $0x8,%rsp
+  76:	5b                   	pop    %rbx
+  77:	5d                   	pop    %rbp
+  78:	c3                   	retq   
+  79:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+  80:	89 df                	mov    %ebx,%edi
+  82:	e8 00 00 00 00       	callq  87 <main+0x87>
+  87:	eb c7                	jmp    50 <main+0x50>
+  89:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+  90:	89 df                	mov    %ebx,%edi
+  92:	e8 00 00 00 00       	callq  97 <main+0x97>
+  97:	eb b7                	jmp    50 <main+0x50>
