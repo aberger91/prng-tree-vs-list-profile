@@ -1,17 +1,3 @@
-/*-------------------------------------------------------------------------*
- *---                                   ---*
- *---       main.c                          ---*
- *---                                   ---*
- *---       This file defines the functions getNextNumber(),        ---*
- *---   obtainNumberBetween() and main() needed for the program of  ---*
- *---   assignment 1.                           ---*
- *---                                   ---*
- *---   ----    ----    ----    ----    ----    ----    ----    ----    ---*
- *---                                   ---*
- *---   Version 1a      2018 January 22     Joseph Phillips ---*
- *---                                   ---*
- *-------------------------------------------------------------------------*/
-
 #include    "header.h"
 
 
