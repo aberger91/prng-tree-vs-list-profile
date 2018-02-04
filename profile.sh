@@ -4,12 +4,12 @@ if [ ! -d data ]; then
     mkdir data
 fi
 
-gcc -c -pg -O0 src/main.o -o bin/main.o
-objdump -d bin/main.o > data/objdump-O0.txt
+gcc -c -pg -O0 src/main.c -o bin/main.o
+objdump -d bin/main.o > data/objdump-main.O0.txt
 rm bin/main.o
 
-gcc -c -pg -O2 src/main.o -o bin/main.o
-objdump -d bin/main.o > data/objdump-O2.txt
+gcc -c -pg -O2 src/main.c -o bin/main.o
+objdump -d bin/main.o > data/objdump-main.O2.txt
 rm bin/main.o
 
 for prog in bin/*; do
