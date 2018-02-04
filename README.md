@@ -56,10 +56,10 @@ gprof -b bin/assign0-2 bin/gmon.out | less
 3. C) The code for getNextNumber()
 4. D) The global variable low
 
-    | Question | Command                             | Results | Comment                                                 |
-    |----------+-------------------------------------+---------+---------------------------------------------------------|
-    | A        | objdump -d -j .text bin/assign1-0   | N       | Integer entry in obtainNumberBetween lives on the stack |
-    | B        | objdump -s -j .rodata bin/assign1-0 | Y       |                                                         |
-    | C        | objdump -d -j .text bin/assign1-0   | Y       |                                                         |
-    | D        | objdump -t -j .bss bin/assign1-0    | Y       |                                                         |
+| Question | Command                             | Results | Comment                                                 |
+|----------+-------------------------------------+---------+---------------------------------------------------------|
+| A        | objdump -d -j .text bin/assign1-0   | N       | Integer entry in obtainNumberBetween lives on the stack |
+| B        | objdump -s -j .rodata bin/assign1-0 | Y       |                                                         |
+| C        | objdump -d -j .text bin/assign1-0   | Y       |                                                         |
+| D        | objdump -t -j .bss bin/assign1-0    | Y       |                                                         |
 
