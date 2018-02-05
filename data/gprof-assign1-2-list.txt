@@ -2,13 +2,11 @@ Flat profile:
 
 Each sample counts as 0.01 seconds.
   %   cumulative   self              self     total           
- time   seconds   seconds    calls   s/call   s/call  name    
- 99.88    267.07   267.07        1   267.07   267.09  generateList
-  0.11    267.36     0.29                             _mcount_private
-  0.01    267.38     0.02  3000000     0.00     0.00  getNextNumber
-  0.00    267.39     0.01                             __fentry__
-  0.00    267.39     0.00        5     0.00     0.00  obtainNumberBetween
-  0.00    267.39     0.00        1     0.00   267.09  countWithList
+ time   seconds   seconds    calls  ms/call  ms/call  name    
+100.00      0.68     0.68        1   680.00   680.00  generateList
+  0.00      0.68     0.00    20306     0.00     0.00  getNextNumber
+  0.00      0.68     0.00        4     0.00     0.00  obtainNumberBetween
+  0.00      0.68     0.00        1     0.00   680.00  countWithList
 
  %         the percentage of the total running time of the
 time       program used by this function.
@@ -46,33 +44,27 @@ notice and this notice are preserved.
 		     Call graph (explanation follows)
 
 
-granularity: each sample hit covers 4 byte(s) for 0.00% of 267.39 seconds
+granularity: each sample hit covers 4 byte(s) for 1.47% of 0.68 seconds
 
 index % time    self  children    called     name
-                0.00  267.09       1/1           main [3]
-[1]     99.9    0.00  267.09       1         countWithList [1]
-              267.07    0.02       1/1           generateList [2]
+                0.00    0.68       1/1           main [3]
+[1]    100.0    0.00    0.68       1         countWithList [1]
+                0.68    0.00       1/1           generateList [2]
 -----------------------------------------------
-              267.07    0.02       1/1           countWithList [1]
-[2]     99.9  267.07    0.02       1         generateList [2]
-                0.02    0.00 3000000/3000000     getNextNumber [5]
------------------------------------------------
-                                                 <spontaneous>
-[3]     99.9    0.00  267.09                 main [3]
-                0.00  267.09       1/1           countWithList [1]
-                0.00    0.00       5/5           obtainNumberBetween [7]
+                0.68    0.00       1/1           countWithList [1]
+[2]    100.0    0.68    0.00       1         generateList [2]
+                0.00    0.00   20306/20306       getNextNumber [4]
 -----------------------------------------------
                                                  <spontaneous>
-[4]      0.1    0.29    0.00                 _mcount_private [4]
+[3]    100.0    0.00    0.68                 main [3]
+                0.00    0.68       1/1           countWithList [1]
+                0.00    0.00       4/4           obtainNumberBetween [5]
 -----------------------------------------------
-                0.02    0.00 3000000/3000000     generateList [2]
-[5]      0.0    0.02    0.00 3000000         getNextNumber [5]
+                0.00    0.00   20306/20306       generateList [2]
+[4]      0.0    0.00    0.00   20306         getNextNumber [4]
 -----------------------------------------------
-                                                 <spontaneous>
-[6]      0.0    0.01    0.00                 __fentry__ [6]
------------------------------------------------
-                0.00    0.00       5/5           main [3]
-[7]      0.0    0.00    0.00       5         obtainNumberBetween [7]
+                0.00    0.00       4/4           main [3]
+[5]      0.0    0.00    0.00       4         obtainNumberBetween [5]
 -----------------------------------------------
 
  This table describes the call tree of the program, and was sorted by
@@ -165,5 +157,5 @@ notice and this notice are preserved.
 
 Index by function name
 
-   [6] __fentry__              [1] countWithList           [5] getNextNumber
-   [4] _mcount_private         [2] generateList            [7] obtainNumberBetween
+   [1] countWithList           [4] getNextNumber
+   [2] generateList            [5] obtainNumberBetween

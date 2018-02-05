@@ -1,20 +1,18 @@
+make clean && make reset
+make
 
-gcc -c -pg -O0 src\main.c -o bin\main.o
-objdump -d bin\main.o > data\objdump-main.O0.o
+objdump -d bin\assign1-0.exe > data\objdump-assign1-0.txt
+objdump -d bin\assign1-2.exe > data\objdump-assign1-2.txt
 
-gcc -c -pg -O2 src\main.c -o bin\main.o
-objdump -d bin\main.o > data\objdump-main.O2.o
+more tests\tree.txt | bin\assign1-0.exe 
+gprof bin\assign1-0.exe gmon.out > data\gprof-assign1-0-tree.txt
 
-cd bin
-more ..\tests\tree.txt | assign1-0.exe 
-gprof assign1-0.exe gmon.out > ..\data\gprof-assign1-0-tree.txt
+more tests\list.txt | bin\assign1-0.exe 
+gprof bin\assign1-0.exe gmon.out > data\gprof-assign1-0-list.txt
 
-more ..\tests\list.txt | assign1-0.exe 
-gprof assign1-0.exe gmon.out > ..\data\gprof-assign1-0-list.txt
+more tests\tree.txt | bin\assign1-2.exe 
+gprof bin\assign1-2.exe gmon.out > data\gprof-assign1-2-tree.txt
 
-more ..\tests\tree.txt | assign1-2.exe 
-gprof assign1-2.exe gmon.out > ..\data\gprof-assign1-2-tree.txt
-
-more ..\tests\list.txt | assign1-2.exe 
-gprof assign1-2.exe gmon.out > ..\data\gprof-assign1-2-list.txt
+more tests\list.txt | bin\assign1-2.exe 
+gprof bin\assign1-2.exe gmon.out > data\gprof-assign1-2-list.txt
 

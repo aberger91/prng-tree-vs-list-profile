@@ -4,13 +4,8 @@ if [ ! -d data ]; then
     mkdir data
 fi
 
-gcc -c -pg -O0 src/main.c -o bin/main.o
-objdump -d bin/main.o > data/objdump-main.O0.txt
-rm bin/main.o
-
-gcc -c -pg -O2 src/main.c -o bin/main.o
-objdump -d bin/main.o > data/objdump-main.O2.txt
-rm bin/main.o
+objdump -d bin/assign1-0 > data/objdump-assign1-0.txt
+objdump -d bin/assign1-2 > data/objdump-assign1-2.txt
 
 for prog in bin/*; do
     for testfile in tests/*; do

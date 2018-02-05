@@ -1,4 +1,4 @@
-all:	directories assign1-0 assign1-2 clean
+all:	assign1-0 assign1-2 clean
 
 directories:
 	mkdir -p bin
