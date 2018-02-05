@@ -69,6 +69,7 @@ gprof -b bin/assign1-2 bin/gmon.out | less
 
 - __objdump-main.00.txt__
 <br>
+
 ```
 00000000000000a5 <main>:
  a5:	55                   	push   %rbp
@@ -89,6 +90,7 @@ gprof -b bin/assign1-2 bin/gmon.out | less
 
 - __objdump-main.02.txt__
 <br>
+
 ```
 0000000000000000 <main>:
   0:	55                   	push   %rbp
