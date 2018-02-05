@@ -1,49 +1,54 @@
 ***
-##  Profiling in C
-##### Comparing the performance of inserting random numbers into a linked list, binary tree  with compiler optimizations
+
+##### Andrew Berger  |   CSC407 - Systems II  |   Winter 2018   |   2/4/2018  |   Joseph Phillips  |   
+
+
+### assign1
+
+![make](data/assign1-make.PNG)
+![make](https://github.com/aberger91/random-histograms/data/assign1-make.PNG)
+
+
 ***
-### Install && Build
-```bash
-sudo apt-get install make
+
+
+
+> __Run assign1-0 twice timing it both times, and answer the following:__
+
+1. __How for 3 million numbers how many self seconds did generateList() take assign1-0?__
+
 ```
-```bash
-# run the program with no optimizations
-bin/assign1-0
-
-### Timing Performance & Call Graph
-```bash
-gprof -b bin/assign1-2 bin/gmon.out | less
+%   cumulative   self              self     total           
+time   seconds   seconds    calls   s/call   s/call  name    
+100.45    267.01   267.01        1   267.01   267.01  generateList
 ```
 
-### Examples
-> _Run the program twice timing it both times, and answer the following:_
-<br>
-> __How for 3 million numbers how many self seconds did generateList() take assign1-0?__
-
-     %   cumulative   self              self     total           
-    time   seconds   seconds    calls   s/call   s/call  name    
-    100.45    267.01   267.01        1   267.01   267.01  generateList
-
-> __How for 3 million numbers how many self seconds did generateTree() take for assign1-0?__
+2. __How for 3 million numbers how many self seconds did generateTree() take for assign1-0?__
 
 
-      %   cumulative   self              self     total           
-     time   seconds   seconds    calls  ms/call  ms/call  name    
-     87.50      0.70     0.70        1   700.00   720.00  generateTree
+```
+%   cumulative   self              self     total           
+time   seconds   seconds    calls  ms/call  ms/call  name    
+87.50      0.70     0.70        1   700.00   720.00  generateTree
+```
 
-> _Run the program twice timing it both times, and answer the following:_
-<br>
-> __How for 3 million numbers how many self seconds did generateList() take for assign1-2?__
+> __Run assign1-2 twice timing it both times, and answer the following:__
 
-      %   cumulative   self              self     total           
-     time   seconds   seconds    calls   s/call   s/call  name    
-     99.87    246.70   246.70        1   246.70   246.75  generateList
+3. __How for 3 million numbers how many self seconds did generateList() take for assign1-2?__
 
-> __How for 3 million numbers how many self seconds did generateTree() take for assign1-2?__
+```
+%   cumulative   self              self     total           
+time   seconds   seconds    calls   s/call   s/call  name    
+99.87    246.70   246.70        1   246.70   246.75  generateList
+```
 
-      %   cumulative   self              self     total           
-     time   seconds   seconds    calls  ms/call  ms/call  name    
-     88.68      0.47     0.47        1   470.00   490.00  generateTree
+4. __How for 3 million numbers how many self seconds did generateTree() take for assign1-2?__
+
+```
+%   cumulative   self              self     total           
+time   seconds   seconds    calls  ms/call  ms/call  name    
+88.68      0.47     0.47        1   470.00   490.00  generateTree
+```
 
 ***
 > __Please find the following inside of assign1-0 by using objdump.__
@@ -60,16 +65,14 @@ gprof -b bin/assign1-2 bin/gmon.out | less
  __D__    | ```objdump -t -j .bss bin/assign1-0 ```     | Y       | Uninitialized variables are in .bss                                                        
 
 ### Optimizations from the Compiler
-<br>
 
-- __getNextNumber__
->  getNextNumber has a reduction in the number of memory lookups when switching the compiler flag from -O0 to -O2. 
-   Variables are kept in registers versus RAM (the stack) for performance. Instead of using ```lea```  to compute the
-   address of high and low into registers before moving their values to %rax, the optimized code uses ```mov``` 
-   to read the values directly.
+-  __getNextNumber__ has a reduction in the number of memory lookups when switching the compiler flag from -O0 to -O2. 
+  Variables are kept in registers versus RAM (the stack) for performance. Instead of using ```lea```  to compute the
+  addresses of high and low from the instruction pointer the optimized code uses ```mov```  to read the values directly into registers.
+
+> objdump -d bin/assign1-0 # without optimzation (objdump-assign1-0.txt)
 
 ```
-  # objdump-assign1-0.txt
 
   401585:	48 8d 05 44 74 00 00 	lea    0x7444(%rip),%rax        # 4089d0 <high>
   40158c:	8b 10                	mov    (%rax),%edx
@@ -82,8 +85,9 @@ gprof -b bin/assign1-2 bin/gmon.out | less
   4015a1:	99                   	cltd   
 ```
 
+> objdump -d bin/assign1-2 # (objdump-assign1-2.txt)
+
 ```
-  # objdump-assign1-2.txt
 
   40157e:	44 8b 05 4f 74 00 00 	mov    0x744f(%rip),%r8d        # 4089d4 <low>
   401585:	8b 0d 45 74 00 00    	mov    0x7445(%rip),%ecx        # 4089d0 <high>
@@ -92,30 +96,59 @@ gprof -b bin/assign1-2 bin/gmon.out | less
   40158f:	83 c1 01             	add    $0x1,%ecx
 ```
 
-- __main__
-> The if-then in the while loop in main is optimized after the -O2 is applied. The optimized code
-  makes a straightforward ```cmp``` for the ``` if ( choice==1) ``` expression instead of using
-  memory lookups and an extra jump.
+-  __main__ has an optimization in calls to obtainNumberBetween. When setting
+  ```%edx``` before the call, the optimzed code does a ```xor   %edx,%edx``` to 
+  set the parameter to zero instead of a ```mov     $0x0,%edx```. There are less
+  memory lookups in the optimized code (2 vs. 3) in the first 11 lines of main
+
+> objdump -d bin/assign1-0 # without optimization (objdump-assign1-0.txt)
 
 ```
-  # objdump-assign1-0.txt
-
-  4016c0:	e8 f0 fe ff ff       	callq  4015b5 <obtainNumberBetween>
-  4016c5:	89 45 dc             	mov    %eax,-0x24(%rbp)
-  4016c8:	48 8d 05 c9 39 00 00 	lea    0x39c9(%rip),%rax        # 405098 <.rdata+0x98>
-  4016cf:	48 89 45 d0          	mov    %rax,-0x30(%rbp)
-  4016d3:	c7 45 fc 01 00 00 00 	movl   $0x1,-0x4(%rbp)
-  4016da:	eb 3c                	jmp    401718 <main+0xea>
-  ...
-
-  401718:	83 7d fc 00          	cmpl   $0x0,-0x4(%rbp)
-  40171c:	75 be                	jne    4016dc <main+0xae>
+000000000040162e <main>:
+  40162e:	e8 b2 20 00 00       	callq  4036e5 <__fentry__>
+  401633:	55                   	push   %rbp
+  401634:	48 89 e5             	mov    %rsp,%rbp
+  401637:	48 83 ec 50          	sub    $0x50,%rsp
+  40163b:	e8 c0 28 00 00       	callq  403f00 <_monstartup>
+  401640:	e8 db 06 00 00       	callq  401d20 <__main>
+  401645:	48 8d 05 d4 39 00 00 	lea    0x39d4(%rip),%rax        # 405020 <.rdata+0x20>
+  40164c:	48 89 45 f0          	mov    %rax,-0x10(%rbp)
+  401650:	48 8b 45 f0          	mov    -0x10(%rbp),%rax
+  401654:	41 b8 ff 7f 00 00    	mov    $0x7fff,%r8d
+  40165a:	ba 00 00 00 00       	mov    $0x0,%edx
+  40165f:	48 89 c1             	mov    %rax,%rcx
+  401662:	e8 4e ff ff ff       	callq  4015b5 <obtainNumberBetween>
 ```
 
-```
-  # objdump-assign1-2.txt
+> objdump -d bin/assign1-2 # (objdump-assign1-2.txt)
 
-  403e5b:	e8 40 d7 ff ff       	callq  4015a0 <obtainNumberBetween>
-  403e60:	83 f8 01             	cmp    $0x1,%eax
-  403e63:	74 10                	je     403e75 <main+0x95>
 ```
+0000000000403de0 <main>:
+  403de0:	e8 a0 f7 ff ff       	callq  403585 <__fentry__>
+  403de5:	56                   	push   %rsi
+  403de6:	53                   	push   %rbx
+  403de7:	48 83 ec 28          	sub    $0x28,%rsp
+  403deb:	48 8d 1d a6 12 00 00 	lea    0x12a6(%rip),%rbx        # 405098 <.rdata+0x98>
+  403df2:	e8 a9 ff ff ff       	callq  403da0 <_monstartup>
+  403df7:	e8 c4 dd ff ff       	callq  401bc0 <__main>
+  403dfc:	41 b8 ff 7f 00 00    	mov    $0x7fff,%r8d
+  403e02:	31 d2                	xor    %edx,%edx
+  403e04:	48 8d 0d 15 12 00 00 	lea    0x1215(%rip),%rcx        # 405020 <.rdata+0x20>
+  403e0b:	e8 90 d7 ff ff       	callq  4015a0 <obtainNumberBetween>
+```
+
+***
+
+### Action Screenshots
+
+![tree](data/assign1-0-tree.PNG)
+
+***
+
+![bss](data/assign1-2-bss.PNG)
+
+***
+
+![rodata](data/assign1-2-rodata.PNG)
+
+***

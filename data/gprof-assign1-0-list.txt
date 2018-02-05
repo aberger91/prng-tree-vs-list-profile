@@ -2,11 +2,15 @@ Flat profile:
 
 Each sample counts as 0.01 seconds.
   %   cumulative   self              self     total           
- time   seconds   seconds    calls  ms/call  ms/call  name    
-100.00      0.64     0.64        1   640.00   640.00  generateList
-  0.00      0.64     0.00    16815     0.00     0.00  getNextNumber
-  0.00      0.64     0.00        4     0.00     0.00  obtainNumberBetween
-  0.00      0.64     0.00        1     0.00   640.00  countWithList
+ time   seconds   seconds    calls   s/call   s/call  name    
+ 99.89    333.02   333.02        1   333.02   333.05  generateList
+  0.08    333.28     0.26                             _mcount_private
+  0.02    333.36     0.08                             __fentry__
+  0.01    333.39     0.03  3000000     0.00     0.00  getNextNumber
+  0.00    333.39     0.00        5     0.00     0.00  obtainNumberBetween
+  0.00    333.39     0.00        1     0.00   333.05  countWithList
+  0.00    333.39     0.00        1     0.00     0.00  freeList
+  0.00    333.39     0.00        1     0.00     0.00  printList
 
  %         the percentage of the total running time of the
 time       program used by this function.
@@ -44,27 +48,41 @@ notice and this notice are preserved.
 		     Call graph (explanation follows)
 
 
-granularity: each sample hit covers 4 byte(s) for 1.56% of 0.64 seconds
+granularity: each sample hit covers 4 byte(s) for 0.00% of 333.39 seconds
 
 index % time    self  children    called     name
-                0.00    0.64       1/1           main [3]
-[1]    100.0    0.00    0.64       1         countWithList [1]
-                0.64    0.00       1/1           generateList [2]
+                0.00  333.05       1/1           main [3]
+[1]     99.9    0.00  333.05       1         countWithList [1]
+              333.02    0.03       1/1           generateList [2]
+                0.00    0.00       1/1           printList [9]
+                0.00    0.00       1/1           freeList [8]
 -----------------------------------------------
-                0.64    0.00       1/1           countWithList [1]
-[2]    100.0    0.64    0.00       1         generateList [2]
-                0.00    0.00   16815/16815       getNextNumber [4]
+              333.02    0.03       1/1           countWithList [1]
+[2]     99.9  333.02    0.03       1         generateList [2]
+                0.03    0.00 3000000/3000000     getNextNumber [6]
 -----------------------------------------------
                                                  <spontaneous>
-[3]    100.0    0.00    0.64                 main [3]
-                0.00    0.64       1/1           countWithList [1]
-                0.00    0.00       4/4           obtainNumberBetween [5]
+[3]     99.9    0.00  333.05                 main [3]
+                0.00  333.05       1/1           countWithList [1]
+                0.00    0.00       5/5           obtainNumberBetween [7]
 -----------------------------------------------
-                0.00    0.00   16815/16815       generateList [2]
-[4]      0.0    0.00    0.00   16815         getNextNumber [4]
+                                                 <spontaneous>
+[4]      0.1    0.26    0.00                 _mcount_private [4]
 -----------------------------------------------
-                0.00    0.00       4/4           main [3]
-[5]      0.0    0.00    0.00       4         obtainNumberBetween [5]
+                                                 <spontaneous>
+[5]      0.0    0.08    0.00                 __fentry__ [5]
+-----------------------------------------------
+                0.03    0.00 3000000/3000000     generateList [2]
+[6]      0.0    0.03    0.00 3000000         getNextNumber [6]
+-----------------------------------------------
+                0.00    0.00       5/5           main [3]
+[7]      0.0    0.00    0.00       5         obtainNumberBetween [7]
+-----------------------------------------------
+                0.00    0.00       1/1           countWithList [1]
+[8]      0.0    0.00    0.00       1         freeList [8]
+-----------------------------------------------
+                0.00    0.00       1/1           countWithList [1]
+[9]      0.0    0.00    0.00       1         printList [9]
 -----------------------------------------------
 
  This table describes the call tree of the program, and was sorted by
@@ -157,5 +175,6 @@ notice and this notice are preserved.
 
 Index by function name
 
-   [1] countWithList           [4] getNextNumber
-   [2] generateList            [5] obtainNumberBetween
+   [5] __fentry__              [8] freeList                [7] obtainNumberBetween
+   [4] _mcount_private         [2] generateList            [9] printList
+   [1] countWithList           [6] getNextNumber
